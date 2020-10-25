@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+(
+  export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_ELASTICSEARCH"
+  . executionplane-invoke "$0 $@"
+
+  cluster health ;
+  cluster state ;
+
+  executionplane-complete
+)

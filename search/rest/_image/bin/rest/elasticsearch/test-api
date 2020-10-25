@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+(
+  export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_ELASTICSEARCH"
+  . executionplane-invoke "$0 $@"
+
+  cluster health ;
+  cluster health .kibana_1 ;
+  cluster state ;
+  cluster state _all/.kibana_1 ;
+  index put hvb-test '{"settings":{"index":{"number_of_shards":3,"number_of_replicas":2}}}' ;
+  index put hvb-test2 ;
+  index get hvb-test ;
+  index get hvb-test2 ;
+  index delete hvb-test ;
+  index delete hvb-test2 ;
+
+  executionplane-complete
+)

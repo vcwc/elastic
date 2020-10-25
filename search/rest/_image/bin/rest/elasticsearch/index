@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+(
+  export PATH="$CONTECO_EXECUTIONPLANE_APIINTERNALPATH_ELASTICSEARCH"
+  . executionplane-invoke "$0 $@"
+
+  export CONTECO_REST_BASE_REQUESTLINE="$@"
+  method="$1"; shift;
+  basePath="/conteco/assets/elasticsearch/index"
+
+  case $method in
+    --info)
+      abort="true"
+      executionplane-error "No implementation for modeco deploy --info: $@"
+    ;;
+    delete)
+      export CONTECO_REST_BASE_URLSUFFIX="$1"; shift;
+    ;;
+    get)
+      export CONTECO_REST_BASE_URLSUFFIX="$1"; shift;
+    ;;
+    put)
+      export CONTECO_REST_BASE_URLSUFFIX="$1"; shift;
+      export CONTECO_REST_BASE_REQUESTBODY="$1"
+    ;;
+    *)
+      abort="true"
+      executionplane-error "invalid API method: $method"
+    ;;
+  esac
+
+  if [[ "$1" == "--output" ]] ; then outputFile="$2"; shift; shift; fi
+  if [[ "$abort" == "" ]] ; then .base execute-request "$basePath/${method}.request" $outputFile; fi
+
+  executionplane-complete
+)
+
+# basePath,
