@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+
+prefix="package_ekg_$2"
+
+if [[ "package_ekg_ekg_elasticsearch_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create package_ekg_ekg_elasticsearch_volume
+	fi
+	
+if [[ "package_ekg_ekg_grafana_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create package_ekg_ekg_grafana_volume
+	fi
+	
+if [[ "package_ekg_ekg_elasticsearch_volume" == "$prefix"* ]] ; then
+			executionplane --silent docker run -v package_ekg_ekg_elasticsearch_volume:/usr/share/elasticsearch/data ${CONTECO_REGISTRY}$1 tar -C / -xvf /modeco/volumes/ekg_elasticsearch_volume.tar
+		fi
+		
+if [[ "package_ekg_ekg_grafana_volume" == "$prefix"* ]] ; then
+			executionplane --silent docker run -v package_ekg_ekg_grafana_volume:/var/lib/grafana ${CONTECO_REGISTRY}$1 tar -C / -xvf /modeco/volumes/ekg_grafana_volume.tar
+		fi
+		

@@ -1,0 +1,3 @@
+ekg_elasticsearch_volume:/usr/share/elasticsearch/data
+ekg_grafana_volume:/var/lib/grafana
+
