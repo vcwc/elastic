@@ -3,7 +3,7 @@ FROM docker.elastic.co/beats/filebeat:${VCW_TAG}
 
 USER root
 ENTRYPOINT ["/vcw/bin/docker-entrypoint"]
-COPY ./docker-entrypoint /vcw/bin/docker-entrypoint
+COPY ./_image/docker-entrypoint /vcw/bin/docker-entrypoint
 RUN chmod -R 755 /vcw/bin/docker-entrypoint
 USER filebeat
 

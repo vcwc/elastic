@@ -1,0 +1,25 @@
+---
+version: '3'
+services:
+
+# START SERVICE vcwc/elastic/metricbeat
+  metricbeat:
+    image: ${VCW_REGISTRY}vcwc/elastic/metricbeat:7.9.2
+    environment: ['ES_METRICBEAT_LOGGING_LEVEL=${VCW_STACK_METRICBEAT_ENVIRONMENT_LOGGING_LEVEL}']
+    command: []
+    volumes: ['/etc:/hostfs/etc:ro','${VCW_STACK_STACKPREFIX}_metricbeat_volume:/usr/share/metricbeat/data']
+    ports: []
+    networks: [${VCW_STACK_NETWORKLOCAL}_overlay]
+    deploy:
+      mode: ${VCW_STACK_METRICBEAT_DEPLOY_MODE}
+      resources:
+        limits:
+          memory: '${VCW_STACK_METRICBEAT_DEPLOY_RESOURCES_LIMITS_MEMORY}'
+        reservations:
+          memory: '${VCW_STACK_METRICBEAT_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
+${VCW_STACK_METRICBEAT_COMPOSE_EXTENSIONS}
+# END SERVICE vcwc/elastic/metricbeat
+
+networks: {${VCW_STACK_NETWORKLOCAL}_overlay: { external: true }}
+volumes: {${VCW_STACK_STACKPREFIX}_metricbeat_volume: { external: true }}
+${VCW_STACK_GLOBAL_COMPOSE_EXTENSIONS}
