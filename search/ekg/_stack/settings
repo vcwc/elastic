@@ -13,9 +13,17 @@ export VCW_STACK_GLOBAL_VOLUME_INITIALISED=""
 # END CONFIGURATION
 
 # START GLOBAL SETTINGS
-export VCW_STACK_GLOBAL='$VCW_STACK_GLOBAL_VOLUMES,$VCW_STACK_GLOBAL_NETWORKS'
-export VCW_STACK_GLOBAL_STACK_STACKS="vcwc/elastic/search,vcwc/elastic/kibana,vcwc/grafana"
-export VCW_STACK_GLOBAL_STACK_STACKNAMES="vcw_stack_elasticsearch,vcw_stack_kibana,vcw_stack_grafana"
+export VCW_STACK_GLOBAL='\
+$VCW_STACK_GLOBAL_VOLUMES,\
+$VCW_STACK_GLOBAL_NETWORKS'
+export VCW_STACK_GLOBAL_STACK_STACKS="\
+vcwc/elastic/search,\
+vcwc/elastic/kibana,\
+vcwc/grafana"
+export VCW_STACK_GLOBAL_STACK_STACKNAMES="\
+vcw_stack_elasticsearch,\
+vcw_stack_kibana,\
+vcw_stack_grafana"
 export VCW_STACK_GLOBAL_NETWORKS="${DOLLAR}{VCW_STACK_NETWORKLOCAL}_overlay: { external: true }"
 export VCW_STACK_GLOBAL_VOLUMES="\
 ${DOLLAR}{VCW_STACK_STACKPREFIX}_elasticsearch_volume: { external: true },\
