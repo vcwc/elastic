@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# START CONFIGURATION
+DOLLAR='$'
+export VCW_MODULE_PACKAGES="\
+ingest_journal:vcwc/elastic/journalbeat"
+# END CONFIGURATION
+
+# START OTHER SETTINGS
+# END OTHER SETTINGS
+

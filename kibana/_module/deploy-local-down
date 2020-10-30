@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+prefix="vcwc_elastic_kibana__$1"
+prefix="vcwc_elastic_kibana__$1"
+
+executionplane --silent docker container prune --force

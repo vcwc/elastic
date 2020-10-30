@@ -1,0 +1,25 @@
+---
+version: '3'
+services:
+
+# START SERVICE vcwc/elastic/search
+  elasticsearch:
+    image: ${VCW_REGISTRY}elasticsearch:7.9.2
+    environment: ['cluster.name=elasticsearch', 'bootstrap.memory_lock=true', ES_JAVA_OPTS=-Xms${ELASTICSEARCH_DEPLOY_RESOURCES_RESERVATIONS_MEMORY} -Xmx${ELASTICSEARCH_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}, 'discovery.type=single-node']
+    command: []
+    volumes: ['${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch_volume:/usr/share/elasticsearch/data']
+    ports: [${ELASTICSEARCH_PORTS}]
+    networks: [${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
+    deploy:
+      mode: replicated
+      resources:
+        limits:
+          memory: '${ELASTICSEARCH_DEPLOY_RESOURCES_LIMITS_MEMORY}'
+        reservations:
+          memory: '${ELASTICSEARCH_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
+${ELASTICSEARCH_COMPOSE_EXTENSIONS}
+# END SERVICE vcwc/elastic/search
+
+networks: {${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay: { external: true }}
+volumes: {${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch_volume: { external: true }}
+${VCW_STACK_GLOBAL_COMPOSE_EXTENSIONS}

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+prefix="vcwc_elastic_search__$1"
+prefix="vcwc_elastic_search__$1"
+
+if [[ "vcwc_elastic_search__elasticsearch_elasticsearch_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcwc_elastic_search__elasticsearch_elasticsearch_volume
+fi
+
+if [[ "vcwc_elastic_search__elasticsearch_elasticsearch_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcwc_elastic_search__elasticsearch_elasticsearch_volume:/usr/share/elasticsearch/data ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd tar -C / -xvf /source/vcwc/elastic/search/_module/volumes/elasticsearch_elasticsearch_volume.tar
+fi

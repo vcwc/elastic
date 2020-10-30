@@ -1,0 +1,12 @@
+metricbeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+output.console:
+  enabled: true
+  pretty: false
+
+logging.level: ${ES_METRICBEAT_LOGGING_LEVEL:DEBUG}
+logging.metrics.enabled: false
+logging.metrics.period: 30s
+logging.json: false

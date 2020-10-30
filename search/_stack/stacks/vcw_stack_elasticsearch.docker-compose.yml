@@ -4,12 +4,12 @@ services:
 
 # START SERVICE vcwc/elastic/search
   elasticsearch:
-    image: ${VCW_REGISTRY}elasticsearch::7.9.2
+    image: ${VCW_REGISTRY}elasticsearch:7.9.2
     environment: ['cluster.name=elasticsearch', 'bootstrap.memory_lock=true', ES_JAVA_OPTS=-Xms${VCW_STACK_ELASTICSEARCH_DEPLOY_RESOURCES_RESERVATIONS_MEMORY} -Xmx${VCW_STACK_ELASTICSEARCH_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}, 'discovery.type=single-node']
     command: []
-    volumes: ['${VCW_STACK_STACKPREFIX}_elasticsearch_volume:/usr/share/elasticsearch/data']
-    ports: []
-    networks: [${VCW_STACK_NETWORKLOCAL}_overlay]
+    volumes: ['${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch_volume:/usr/share/elasticsearch/data']
+    ports: [${VCW_STACK_ELASTICSEARCH_PORTS}]
+    networks: [${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
     deploy:
       mode: replicated
       resources:
@@ -20,6 +20,6 @@ services:
 ${VCW_STACK_ELASTICSEARCH_COMPOSE_EXTENSIONS}
 # END SERVICE vcwc/elastic/search
 
-networks: {${VCW_STACK_NETWORKLOCAL}_overlay: { external: true }}
-volumes: {${VCW_STACK_STACKPREFIX}_elasticsearch_volume: { external: true }}
+networks: {${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay: { external: true }}
+volumes: {${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch_volume: { external: true }}
 ${VCW_STACK_GLOBAL_COMPOSE_EXTENSIONS}

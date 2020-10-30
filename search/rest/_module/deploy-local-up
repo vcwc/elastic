@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+prefix="vcwc_elastic_search_rest__$1"
+prefix="vcwc_elastic_search_rest__$1"
+
+if [[ "vcwc_elastic_search_rest__api_rest_elasticsearch_data_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcwc_elastic_search_rest__api_rest_elasticsearch_data_volume
+fi
+
+if [[ "vcwc_elastic_search_rest__api_rest_elasticsearch_data_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcwc_elastic_search_rest__api_rest_elasticsearch_data_volume:/conteco/pwd ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd tar -C / -xvf /source/vcwc/elastic/search/rest/_module/volumes/api_rest_elasticsearch_data_volume.tar
+fi

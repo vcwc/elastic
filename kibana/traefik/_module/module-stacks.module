@@ -1,0 +1,2 @@
+boot/shutdown,kibana,kibana
+start/stop,kibana,kibana_ui_kibana

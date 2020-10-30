@@ -1,0 +1,26 @@
+---
+version: '3'
+services:
+
+# START SERVICE vcwc/elastic/search/rest
+  elasticsearch_rest:
+    image: ${VCW_REGISTRY}vcwc/elastic.search.rest:7.9.2
+    environment: ['VCW_STACK_STATIC_REST_BASE_API_LOGGING=${API_ENVIRONMENT_REST_BASE_CURL_LOGGING}','API_BASE_PROTOCOL=${API_ENVIRONMENT_REST_ELASTICSEARCH_PROTOCOL}','API_BASE_HOST=${API_ENVIRONMENT_REST_ELASTICSEARCH_HOST}','API_BASE_PORT=${API_ENVIRONMENT_REST_ELASTICSEARCH_PORT}','API_BASE_URLPREFIX=${API_ENVIRONMENT_REST_ELASTICSEARCH_PREFIX}']
+    command: [${API_COMMAND}]
+    volumes: ['${VCW_STACK_GLOBAL_STACKPREFIX}_rest_elasticsearch_data_volume:/conteco/pwd'${API_VOLUMES_MAPPINGS}]
+    ports: []
+    networks: [${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
+    deploy:
+      mode: ${API_DEPLOY_MODE}
+      resources:
+        limits:
+          memory: '${API_DEPLOY_RESOURCES_LIMITS_MEMORY}'
+        reservations:
+          memory: '${API_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
+      restart_policy: { condition: none }
+${API_COMPOSE_EXTENSIONS}
+# END SERVICE vcwc/elastic/search/rest
+
+networks: {${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay: { external: true }}
+volumes: {${VCW_STACK_GLOBAL_STACKPREFIX}_rest_elasticsearch_data_volume: { external: true }}
+${VCW_STACK_GLOBAL_COMPOSE_EXTENSIONS}

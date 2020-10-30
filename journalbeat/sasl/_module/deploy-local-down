@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+prefix="vcwc_elastic_journalbeat_sasl__$1"
+prefix="vcwc_elastic_journalbeat_sasl__$1"
+
+executionplane --silent docker container prune --force
+
+if [[ "vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_config" == "$prefix"* ]] ; then
+	continue="true"
+	while [[ "true" == "$continue" ]] ;
+	do
+		executionplane docker volume rm "vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_config"
+		result=$(docker volume ls | grep "vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_config")
+		if [[ "$result" == "" ]] ; then
+			continue="false"
+		else
+			sleep 3;
+		fi
+	done;
+fi
+
+if [[ "vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_volume" == "$prefix"* ]] ; then
+	continue="true"
+	while [[ "true" == "$continue" ]] ;
+	do
+		executionplane docker volume rm "vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_volume"
+		result=$(docker volume ls | grep "vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_volume")
+		if [[ "$result" == "" ]] ; then
+			continue="false"
+		else
+			sleep 3;
+		fi
+	done;
+fi

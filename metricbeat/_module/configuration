@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# START CONFIGURATION
+DOLLAR='$'
+export VCW_MODULE_PACKAGES="\
+metrics:vcwc/elastic/metricbeat"
+# END CONFIGURATION
+
+# START OTHER SETTINGS
+export METRICS_MODULE_METRICBEAT_LOGGING_LEVEL="warning"
+# END OTHER SETTINGS
+

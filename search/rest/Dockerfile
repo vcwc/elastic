@@ -5,12 +5,12 @@ FROM vcwc/bash.rest:${VCW_TAG_BASH}
 COPY ./_image /vcw/
 RUN chmod -R +x /vcw/bin
 
-ENV VWC_REALM=vcwc \
-    VWC_LIBRARY=elastic \
-    VWC_IMAGE=search \
-    VWC_FLAVOR=rest \
-    VWC_TAG=${VCW_TAG} \
-    VWC_IMAGENAME=vcwc/elastic.search.rest
+ENV VCW_REALM=vcwc \
+    VCW_LIBRARY=elastic \
+    VCW_IMAGE=search \
+    VCW_FLAVOR=rest \
+    VCW_TAG=${VCW_TAG} \
+    VCW_IMAGENAME=vcwc/elastic.search.rest
 
 LABEL co.vcweb.schema-version="1.0" \
       co.vcweb.label="vcwc/elastic.search.rest Image" \

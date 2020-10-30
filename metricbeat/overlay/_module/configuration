@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# START CONFIGURATION
+DOLLAR='$'
+export VCW_MODULE_PACKAGES="\
+metrics_node:vcwc/elastic/metricbeat/overlay"
+# END CONFIGURATION
+
+# START OTHER SETTINGS
+# END OTHER SETTINGS
+
