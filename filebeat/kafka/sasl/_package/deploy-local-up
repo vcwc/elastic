@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-
-prefix="package_ingest_kafka_sasl_$2"
-
-if [[ "package_ingest_kafka_sasl_ingest_kafka_sasl_filebeat_volume" == "$prefix"* ]] ; then
-	executionplane --silent docker volume create package_ingest_kafka_sasl_ingest_kafka_sasl_filebeat_volume
-	fi
-	

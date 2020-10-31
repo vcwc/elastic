@@ -1,0 +1,2 @@
+heartbeat_heartbeat_config:/vcw/pwd
+heartbeat_heartbeat_monitors_volume:/usr/share/heartbeat/monitors.d

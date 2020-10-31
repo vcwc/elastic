@@ -6,8 +6,13 @@ export VCW_STACK_GLOBAL_STACKS="vcwc/elastic/hearbeat"
 export VCW_STACK_GLOBAL_STACKNAMES="vcw_stack_heartbeat"
 export VCW_STACK_GLOBAL_BOOTSTACKS=""
 export VCW_STACK_GLOBAL_RUNSTACKS="vcw_stack_heartbeat"
-export VCW_STACK_GLOBAL_VOLUME_LIST="${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_data_volume,${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_monitors_volume"
-export VCW_STACK_GLOBAL_VOLUME_INITIALISED=""
+export VCW_STACK_GLOBAL_VOLUME_LIST="\
+${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_config,\
+${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_data_volume,\
+${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_monitors_volume"
+export VCW_STACK_GLOBAL_VOLUME_INITIALISED="\
+${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_config:/vcw/pwd,\
+${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_monitors_volume:/usr/share/heartbeat/monitors.d"
 # END CONFIGURATION
 
 # START GLOBAL SETTINGS
@@ -25,11 +30,14 @@ export VCW_STACK_GLOBAL_SERVICE_NAME="heartbeat"
 export VCW_STACK_GLOBAL_IMAGE_NAME="vcwc/elastic.heartbeat"
 export VCW_STACK_HEARTBEAT_ENVIRONMENT="'ES_HEARTBEAT_LOGGING_LEVEL=${DOLLAR}{VCW_STACK_HEARTBEAT_MODULE_LOGGING_LEVEL}'"
 export VCW_STACK_HEARTBEAT_VOLUMES="\
-'/etc:/hostfs/etc:ro','${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_data_volume:/usr/share/heartbeat/data',\
+'/etc:/hostfs/etc:ro',\
+'${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_config:/vcw/pwd',\
+'${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_data_volume:/usr/share/heartbeat/data',\
 '${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_monitors_volume:/usr/share/heartbeat/monitors.d'"
 export VCW_STACK_HEARTBEAT_NETWORKS="${DOLLAR}{VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay"
 export VCW_STACK_GLOBAL_VOLUMES="\
-${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_data_volume: { external: true },
+${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_config: { external: true },\
+${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_data_volume: { external: true },\
 ${DOLLAR}{VCW_STACK_GLOBAL_STACKPREFIX}_heartbeat_monitors_volume: { external: true }"
 export VCW_STACK_GLOBAL_NETWORKS="${DOLLAR}{VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay: { external: true }"
 # END GLOBAL SETTINGS

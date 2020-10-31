@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+prefix="vcwc_elastic_filebeat_file_sasl__$1"
+prefix="vcwc_elastic_filebeat_file_sasl__$1"
+
+if [[ "vcwc_elastic_filebeat_file_sasl__filebeat_filebeat_data_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcwc_elastic_filebeat_file_sasl__filebeat_filebeat_data_volume
+fi
+
+if [[ "vcwc_elastic_filebeat_file_sasl__filebeat_filebeat_config" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcwc_elastic_filebeat_file_sasl__filebeat_filebeat_config
+fi
+
+if [[ "vcwc_elastic_filebeat_file_sasl__filebeat_filebeat_ingest" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcwc_elastic_filebeat_file_sasl__filebeat_filebeat_ingest
+fi
+
+if [[ "vcwc_elastic_filebeat_file_sasl__filebeat_filebeat_config" == "$prefix"* ]] ; then
+	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcwc_elastic_filebeat_file_sasl__filebeat_filebeat_config:/vcw/pwd ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd cp -r /source/vcwc/elastic/filebeat/file/sasl/_module/volumes/filebeat_filebeat_config/* /vcw/pwd
+fi
+
+if [[ "vcwc_elastic_filebeat_file_sasl__filebeat_filebeat_ingest" == "$prefix"* ]] ; then
+	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcwc_elastic_filebeat_file_sasl__filebeat_filebeat_ingest:/vcw/ingest ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd tar -C / -xvf /source/vcwc/elastic/filebeat/file/sasl/_module/volumes/filebeat_filebeat_ingest.tar
+fi

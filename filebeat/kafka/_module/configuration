@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# START CONFIGURATION
+DOLLAR='$'
+export VCW_MODULE_PACKAGES="\
+filebeat:vcwc/elastic/filebeat/kafka"
+# END CONFIGURATION

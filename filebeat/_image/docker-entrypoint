@@ -2,13 +2,11 @@
 
 # set CLUSTERNODE if host hostname file is mapped
 CLUSTERNODE=$(< /etc/hostname)
-if [[ -d /hostfs/etc ]] ; then
-  CLUSTERNODE="linuxkit"
-fi
-if [[ -f /hostfs/etc/hostname ]]; then
-  CLUSTERNODE=$(< /hostfs/etc/hostname)
-fi
-if [[ "${CLUSTERNODE}" == "" ]]; then
-  CLUSTERNODE="not-set"
-fi
-/usr/local/bin/docker-entrypoint filebeat -e -strict.perms=false -E name="${CLUSTERNODE}"
+if [[ -d /hostfs/etc ]] ; then CLUSTERNODE="linuxkit"; fi
+if [[ -f /hostfs/etc/hostname ]]; then  CLUSTERNODE=$(< /hostfs/etc/hostname); fi
+if [[ "${CLUSTERNODE}" == "" ]]; then CLUSTERNODE="not-set"; fi
+
+
+if [[ "$@" != "" ]] ; then $@;
+elif [[ -f /vcw/pwd/filebeat.yml ]] ; then /usr/local/bin/docker-entrypoint -e -strict.perms=false -E name="${CLUSTERNODE}" -c "/vcw/pwd/filebeat.yml";
+else /usr/local/bin/docker-entrypoint -e -strict.perms=false -E name="${CLUSTERNODE}"; fi

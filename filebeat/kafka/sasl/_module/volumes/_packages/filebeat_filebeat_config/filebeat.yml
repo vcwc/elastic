@@ -1,0 +1,56 @@
+filebeat.inputs:
+- type: kafka
+  hosts: ${ES_FILEBEAT_KAFKA_HOSTS:"kafka:9092"}
+  topics: ${ES_FILEBEAT_KAFKA_TOPICS:"filebeat"}
+  group_id: "${ES_FILEBEAT_KAFKA_CONSUMERGROUP:filebeat.kafka}"
+  initial_offset: ${ES_FILEBEAT_KAFKA_INITIAL_OFFSET:cursor}
+  ssl.enabled: ${ES_FILEBEAT_KAFKA_SSL:false}
+  username: "${ES_FILEBEAT_KAFKA_USERNAME}"
+  password: "${ES_FILEBEAT_KAFKA_PASSWORD}"
+  processors:
+  - decode_json_fields
+    fields: [message]
+    target: json
+
+output.console:
+  enabled: ${ES_FILEBEAT_OUTPUT_CONSOLE:false}
+  pretty: false
+
+output.elasticsearch:
+  enabled: ${ES_FILEBEAT_OUTPUT_ELASTICSEARCH:false}
+  ssl.enabled: ${ES_FILEBEAT_OUTPUT_CONFIG_ELASTICSEARCH_SSL:false}
+  hosts: ${ES_FILEBEAT_OUTPUT_CONFIG_ELASTICSEARCH_HOSTS:'elasticsearch:9200'}
+  username: "${ES_FILEBEAT_OUTPUT_CONFIG_ELASTICSEARCH_USERNAME}"
+  password: "${ES_FILEBEAT_OUTPUT_CONFIG_ELASTICSEARCH_PASSWORD}"
+  index: "${ES_FILEBEAT_OUTPUT_CONFIG_ELASTICSEARCH_INDEX:filebeat}"
+
+setup.template.name: "${ES_FILEBEAT_OUTPUT_CONFIG_ELASTICSEARCH_INDEX:filebeat}"
+setup.template.pattern: "${ES_FILEBEAT_OUTPUT_CONFIG_ELASTICSEARCH_INDEX:filebeat}"
+
+setup.kibana.host: ${ES_FILEBEAT_OUTPUT_CONFIG_KIBANA_HOST:"kibana:5601"}
+setup.dashboards.enabled: ${ES_FILEBEAT_OUTPUT_CONFIG_KIBANA_DASHBOARDS:false}
+
+output.logstash:
+  enabled: ${ES_FILEBEAT_OUTPUT_LOGSTASH:false}
+  hosts: ${ES_FILEBEAT_OUTPUT_CONFIG_LOGSTASH_HOSTS:'logstash:5044'}
+  index: "${ES_FILEBEAT_OUTPUT_CONFIG_LOGSTASH_INDEX:filebeat}"
+
+output.kafka:
+  enabled: ${ES_FILEBEAT_OUTPUT_KAFKA:false}
+  ssl.enabled: ${ES_FILEBEAT_OUTPUT_CONFIG_KAFKA_SSL:false}
+  hosts: ${ES_FILEBEAT_OUTPUT_CONFIG_KAFKA_HOSTS:"kafka:9092"}
+  username: "${ES_FILEBEAT_OUTPUT_CONFIG_KAFKA_USERNAME}"
+  password: "${ES_FILEBEAT_OUTPUT_CONFIG_KAFKA_PASSWORD}"
+  topic: '${ES_FILEBEAT_OUTPUT_CONFIG_KAFKA_TOPIC:es_filebeat_kafka}'
+  version: "2.0.0"
+  partition.round_robin:
+    reachable_only: false
+
+  required_acks: 1
+  compression: ${ES_FILEBEAT_OUTPUT_CONFIG_KAFKA_COMPRESSION:gzip}
+  max_message_bytes: 1000000
+
+logging.level: ${ES_FILEBEAT_LOGGING_LEVEL:warning}
+logging.metrics.enabled: false
+logging.metrics.period: 30s
+logging.json: false
