@@ -5,7 +5,7 @@ USER root
 ENTRYPOINT ["/vcw/bin/docker-entrypoint"]
 COPY ./_image/docker-entrypoint /vcw/bin/docker-entrypoint
 RUN chmod -R 755 /vcw/bin/docker-entrypoint
-USER journalbeat
+#USER journalbeat
 
 LABEL co.vcweb.schema-version="1.0" \
       co.vcweb.label="vcwc/elastic/journalbeat - External Build" \
