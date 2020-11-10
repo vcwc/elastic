@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
 
-prefix="vcwc_elastic_heartbeat__$1"
-prefix="vcwc_elastic_heartbeat__$1"
+prefix="vcw_module_vcwc_elastic_heartbeat__$1"
+prefix="vcw_module_vcwc_elastic_heartbeat__$1"
 
-if [[ "vcwc_elastic_heartbeat__heartbeat_heartbeat_config" == "$prefix"* ]] ; then
-	executionplane --silent docker volume create vcwc_elastic_heartbeat__heartbeat_heartbeat_config
+if [[ "vcw_module_vcwc_elastic_heartbeat__heartbeat_heartbeat_config" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcw_module_vcwc_elastic_heartbeat__heartbeat_heartbeat_config
 fi
 
-if [[ "vcwc_elastic_heartbeat__heartbeat_heartbeat_data_volume" == "$prefix"* ]] ; then
-	executionplane --silent docker volume create vcwc_elastic_heartbeat__heartbeat_heartbeat_data_volume
+if [[ "vcw_module_vcwc_elastic_heartbeat__heartbeat_heartbeat_data_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcw_module_vcwc_elastic_heartbeat__heartbeat_heartbeat_data_volume
 fi
 
-if [[ "vcwc_elastic_heartbeat__heartbeat_heartbeat_monitors_volume" == "$prefix"* ]] ; then
-	executionplane --silent docker volume create vcwc_elastic_heartbeat__heartbeat_heartbeat_monitors_volume
+if [[ "vcw_module_vcwc_elastic_heartbeat__heartbeat_heartbeat_monitors_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcw_module_vcwc_elastic_heartbeat__heartbeat_heartbeat_monitors_volume
 fi
 
-if [[ "vcwc_elastic_heartbeat__heartbeat_heartbeat_config" == "$prefix"* ]] ; then
-	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcwc_elastic_heartbeat__heartbeat_heartbeat_config:/vcw/pwd ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd cp -r /source/vcwc/elastic/heartbeat/_module/volumes/heartbeat_heartbeat_config/* /vcw/pwd
+if [[ "vcw_module_vcwc_elastic_heartbeat__heartbeat_heartbeat_config" == "$prefix"* ]] ; then
+	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcw_module_vcwc_elastic_heartbeat__heartbeat_heartbeat_config:/vcw/pwd ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd cp -r /source/vcwc/elastic/heartbeat/_module/volumes/heartbeat_heartbeat_config/* /vcw/pwd
 fi
 
-if [[ "vcwc_elastic_heartbeat__heartbeat_heartbeat_monitors_volume" == "$prefix"* ]] ; then
-	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcwc_elastic_heartbeat__heartbeat_heartbeat_monitors_volume:/usr/share/heartbeat/monitors.d ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd cp -r /source/vcwc/elastic/heartbeat/_module/volumes/heartbeat_heartbeat_monitors_volume/* /usr/share/heartbeat/monitors.d
+if [[ "vcw_module_vcwc_elastic_heartbeat__heartbeat_heartbeat_monitors_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcw_module_vcwc_elastic_heartbeat__heartbeat_heartbeat_monitors_volume:/usr/share/heartbeat/monitors.d ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd cp -r /source/vcwc/elastic/heartbeat/_module/volumes/heartbeat_heartbeat_monitors_volume/* /usr/share/heartbeat/monitors.d
 fi
