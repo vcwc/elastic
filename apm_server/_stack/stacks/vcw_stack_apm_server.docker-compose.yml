@@ -2,7 +2,7 @@
 version: '3'
 services:
 
-# START SERVICE vcwc/elastic/apm-server
+# START SERVICE vcwc/elastic/apm_server
   apm_server:
     image: ${VCW_REGISTRY}docker.elastic.co/apm/apm-server:7.9.2
     environment: ['ELASTICSEARCH_HOSTS=http://elasticsearch:9200','SERVER_BASEPATH=/${VCW_STACK_GLOBAL_URLPREFIX}/kibana', 'XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED=false', 'LOGGING_VERBOSE=false']
@@ -18,7 +18,7 @@ services:
         reservations:
           memory: '${VCW_STACK_APM_SERVER_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
 ${VCW_STACK_APM_SERVER_COMPOSE_EXTENSIONS}
-# END SERVICE vcwc/elastic/apm-server
+# END SERVICE vcwc/elastic/apm_server
 
 networks: {${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay: { external: true }}
 volumes: {}

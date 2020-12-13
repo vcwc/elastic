@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+prefix="vcw_module_vcwc_elastic_apm_server__$1"
+prefix="vcw_module_vcwc_elastic_apm_server__$1"

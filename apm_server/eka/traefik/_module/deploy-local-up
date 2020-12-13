@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+prefix="vcwc_elastic_search_ekg_traefik__$1"
+prefix="vcwc_elastic_search_ekg_traefik__$1"
+
+if [[ "vcwc_elastic_search_ekg_traefik__ekg_elasticsearch_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcwc_elastic_search_ekg_traefik__ekg_elasticsearch_volume
+fi
+
+if [[ "vcwc_elastic_search_ekg_traefik__ekg_grafana_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcwc_elastic_search_ekg_traefik__ekg_grafana_volume
+fi
+
+if [[ "vcwc_elastic_search_ekg_traefik__ekg_nginx_config_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcwc_elastic_search_ekg_traefik__ekg_nginx_config_volume
+fi
+
+if [[ "vcwc_elastic_search_ekg_traefik__ekg_elasticsearch_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcwc_elastic_search_ekg_traefik__ekg_elasticsearch_volume:/usr/share/elasticsearch/data ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd tar -C / -xvf /source/vcwc/elastic/search/ekg/traefik/_module/volumes/ekg_elasticsearch_volume.tar
+fi
+
+if [[ "vcwc_elastic_search_ekg_traefik__ekg_grafana_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcwc_elastic_search_ekg_traefik__ekg_grafana_volume:/var/lib/grafana ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd tar -C / -xvf /source/vcwc/elastic/search/ekg/traefik/_module/volumes/ekg_grafana_volume.tar
+fi
+
+if [[ "vcwc_elastic_search_ekg_traefik__ekg_nginx_config_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcwc_elastic_search_ekg_traefik__ekg_nginx_config_volume:/vcw/pwd ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd cp -r /source/vcwc/elastic/search/ekg/traefik/_module/volumes/ekg_nginx_config_volume/* /vcw/pwd
+fi
