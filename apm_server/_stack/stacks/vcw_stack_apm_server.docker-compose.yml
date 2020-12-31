@@ -5,7 +5,7 @@ services:
 # START SERVICE vcwc/elastic/apm_server
   apm_server:
     image: ${VCW_REGISTRY}docker.elastic.co/apm/apm-server:7.9.2
-    environment: ['ELASTICSEARCH_HOSTS=http://elasticsearch:9200','SERVER_BASEPATH=/${VCW_STACK_GLOBAL_URLPREFIX}/kibana', 'XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED=false', 'LOGGING_VERBOSE=false']
+    environment: ['ELASTICSEARCH_HOSTS=http://elasticsearch:9200']
     command: []
     volumes: []
     ports: [${VCW_STACK_APM_SERVER_PORTS}]
