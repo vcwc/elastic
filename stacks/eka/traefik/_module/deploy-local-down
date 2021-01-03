@@ -1,44 +1,16 @@
 #!/usr/bin/env bash
 
-prefix="vcwc_elastic_search_ekg_traefik__$1"
-prefix="vcwc_elastic_search_ekg_traefik__$1"
+prefix="vcw_module_vcwc_elastic_stacks_eka_traefik__$1"
+prefix="vcw_module_vcwc_elastic_stacks_eka_traefik__$1"
 
 executionplane --silent docker container prune --force
 
-if [[ "vcwc_elastic_search_ekg_traefik__ekg_elasticsearch_volume" == "$prefix"* ]] ; then
+if [[ "vcw_module_vcwc_elastic_stacks_eka_traefik__eka_elasticsearch_volume" == "$prefix"* ]] ; then
 	continue="true"
 	while [[ "true" == "$continue" ]] ;
 	do
-		executionplane docker volume rm "vcwc_elastic_search_ekg_traefik__ekg_elasticsearch_volume"
-		result=$(docker volume ls | grep "vcwc_elastic_search_ekg_traefik__ekg_elasticsearch_volume")
-		if [[ "$result" == "" ]] ; then
-			continue="false"
-		else
-			sleep 3;
-		fi
-	done;
-fi
-
-if [[ "vcwc_elastic_search_ekg_traefik__ekg_grafana_volume" == "$prefix"* ]] ; then
-	continue="true"
-	while [[ "true" == "$continue" ]] ;
-	do
-		executionplane docker volume rm "vcwc_elastic_search_ekg_traefik__ekg_grafana_volume"
-		result=$(docker volume ls | grep "vcwc_elastic_search_ekg_traefik__ekg_grafana_volume")
-		if [[ "$result" == "" ]] ; then
-			continue="false"
-		else
-			sleep 3;
-		fi
-	done;
-fi
-
-if [[ "vcwc_elastic_search_ekg_traefik__ekg_nginx_config_volume" == "$prefix"* ]] ; then
-	continue="true"
-	while [[ "true" == "$continue" ]] ;
-	do
-		executionplane docker volume rm "vcwc_elastic_search_ekg_traefik__ekg_nginx_config_volume"
-		result=$(docker volume ls | grep "vcwc_elastic_search_ekg_traefik__ekg_nginx_config_volume")
+		executionplane docker volume rm "vcw_module_vcwc_elastic_stacks_eka_traefik__eka_elasticsearch_volume"
+		result=$(docker volume ls | grep "vcw_module_vcwc_elastic_stacks_eka_traefik__eka_elasticsearch_volume")
 		if [[ "$result" == "" ]] ; then
 			continue="false"
 		else

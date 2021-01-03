@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+prefix="vcw_module_vcwc_elastic_apm_server_traefik__$1"
+prefix="vcw_module_vcwc_elastic_apm_server_traefik__$1"
+
+executionplane --silent docker container prune --force

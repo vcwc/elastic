@@ -3,9 +3,11 @@
 # START CONFIGURATION
 DOLLAR='$'
 export VCW_MODULE_PACKAGES="\
-ekg:vcwc/elastic/search/ekg/traefik"
+eka:vcwc/elastic/stacks/eka/traefik"
 # END CONFIGURATION
 
 # START OTHER SETTINGS
+export EKA_KIBANA_MODULE_KIBANA_LOGGING_VERBOSE="false"
+export EKA_KIBANA_MODULE_KIBANA_SERVER_BASEPATH="/${EKA_GLOBAL_URLPREFIX}/kibana"
 # END OTHER SETTINGS
 

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+prefix="vcw_module_vcwc_elastic_stacks_ekg__$1"
+prefix="vcw_module_vcwc_elastic_stacks_ekg__$1"
+
+if [[ "vcw_module_vcwc_elastic_stacks_ekg__ekg_elasticsearch_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcw_module_vcwc_elastic_stacks_ekg__ekg_elasticsearch_volume
+fi
+
+if [[ "vcw_module_vcwc_elastic_stacks_ekg__ekg_grafana_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcw_module_vcwc_elastic_stacks_ekg__ekg_grafana_volume
+fi
+
+if [[ "vcw_module_vcwc_elastic_stacks_ekg__ekg_elasticsearch_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcw_module_vcwc_elastic_stacks_ekg__ekg_elasticsearch_volume:/usr/share/elasticsearch/data ${VCW_REGISTRY}vcwc/controlplane.vcw console untar /source/vcwc/elastic/stacks/ekg/_module/volumes/ekg_elasticsearch_volume.tar
+fi

@@ -1,0 +1,32 @@
+---
+version: '3'
+services:
+
+# START SERVICE vcwc/elastic/apm_server/traefik
+  apm_server:
+    image: ${VCW_REGISTRY}docker.elastic.co/apm/apm-server:7.9.2
+    environment: ['ELASTICSEARCH_HOSTS=http://elasticsearch:9200']
+    command: []
+    volumes: []
+    ports: []
+    networks: [${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
+    deploy:
+      mode: replicated
+      resources:
+        limits:
+          memory: '${APM_SERVER_DEPLOY_RESOURCES_LIMITS_MEMORY}'
+        reservations:
+          memory: '${APM_SERVER_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
+
+      labels: [traefik.enable=true,traefik.docker.network=${VCW_STACK_GLOBAL_NETWORKGLOBAL}_overlay,
+      "traefik.http.middlewares.${VCW_STACK_GLOBAL_STACKPREFIX}_apm_server.stripprefix.prefixes=/${VCW_STACK_GLOBAL_URLPREFIX}/apm_server,/${VCW_STACK_GLOBAL_URLPREFIX}/apm_server/",
+      traefik.http.services.${VCW_STACK_GLOBAL_STACKPREFIX}_apm_server.loadbalancer.server.port=8200,
+      traefik.http.routers.${VCW_STACK_GLOBAL_STACKPREFIX}_apm_server.middlewares=${VCW_STACK_GLOBAL_STACKPREFIX}_apm_server@docker,
+      traefik.http.routers.${VCW_STACK_GLOBAL_STACKPREFIX}_apm_server.entrypoints=conteco,
+      traefik.http.routers.${VCW_STACK_GLOBAL_STACKPREFIX}_apm_server.rule=PathPrefix("/${VCW_STACK_GLOBAL_URLPREFIX}/apm_server") ]
+${APM_SERVER_COMPOSE_EXTENSIONS}
+# END SERVICE vcwc/elastic/apm_server/traefik
+
+networks: {${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay: { external: true }}
+volumes: {}
+${VCW_STACK_GLOBAL_COMPOSE_EXTENSIONS}
