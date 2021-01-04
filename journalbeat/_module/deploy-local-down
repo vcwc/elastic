@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-prefix="vcwc_elastic_journalbeat__$1"
-prefix="vcwc_elastic_journalbeat__$1"
+prefix="vcw_module_vcwc_elastic_journalbeat__$1"
+prefix="vcw_module_vcwc_elastic_journalbeat__$1"
 
 executionplane --silent docker container prune --force
 
-if [[ "vcwc_elastic_journalbeat__ingest_journal_journalbeat_config" == "$prefix"* ]] ; then
+if [[ "vcw_module_vcwc_elastic_journalbeat__ingest_journal_journalbeat_config" == "$prefix"* ]] ; then
 	continue="true"
 	while [[ "true" == "$continue" ]] ;
 	do
-		executionplane docker volume rm "vcwc_elastic_journalbeat__ingest_journal_journalbeat_config"
-		result=$(docker volume ls | grep "vcwc_elastic_journalbeat__ingest_journal_journalbeat_config")
+		executionplane docker volume rm "vcw_module_vcwc_elastic_journalbeat__ingest_journal_journalbeat_config"
+		result=$(docker volume ls | grep "vcw_module_vcwc_elastic_journalbeat__ingest_journal_journalbeat_config")
 		if [[ "$result" == "" ]] ; then
 			continue="false"
 		else
@@ -19,12 +19,12 @@ if [[ "vcwc_elastic_journalbeat__ingest_journal_journalbeat_config" == "$prefix"
 	done;
 fi
 
-if [[ "vcwc_elastic_journalbeat__ingest_journal_journalbeat_volume" == "$prefix"* ]] ; then
+if [[ "vcw_module_vcwc_elastic_journalbeat__ingest_journal_journalbeat_volume" == "$prefix"* ]] ; then
 	continue="true"
 	while [[ "true" == "$continue" ]] ;
 	do
-		executionplane docker volume rm "vcwc_elastic_journalbeat__ingest_journal_journalbeat_volume"
-		result=$(docker volume ls | grep "vcwc_elastic_journalbeat__ingest_journal_journalbeat_volume")
+		executionplane docker volume rm "vcw_module_vcwc_elastic_journalbeat__ingest_journal_journalbeat_volume"
+		result=$(docker volume ls | grep "vcw_module_vcwc_elastic_journalbeat__ingest_journal_journalbeat_volume")
 		if [[ "$result" == "" ]] ; then
 			continue="false"
 		else

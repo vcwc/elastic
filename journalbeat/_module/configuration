@@ -7,5 +7,6 @@ ingest_journal:vcwc/elastic/journalbeat"
 # END CONFIGURATION
 
 # START OTHER SETTINGS
+export INGEST_JOURNAL_MODULE_JOURNALBEAT_HOST_JOURNALPATH="/var/log/journal"
 # END OTHER SETTINGS
 

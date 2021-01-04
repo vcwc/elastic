@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-prefix="vcwc_elastic_journalbeat_sasl__$1"
-prefix="vcwc_elastic_journalbeat_sasl__$1"
+prefix="vcw_module_vcwc_elastic_journalbeat_sasl__$1"
+prefix="vcw_module_vcwc_elastic_journalbeat_sasl__$1"
 
-if [[ "vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_config" == "$prefix"* ]] ; then
-	executionplane --silent docker volume create vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_config
+if [[ "vcw_module_vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_config" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcw_module_vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_config
 fi
 
-if [[ "vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_volume" == "$prefix"* ]] ; then
-	executionplane --silent docker volume create vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_volume
+if [[ "vcw_module_vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcw_module_vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_volume
 fi
 
-if [[ "vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_config" == "$prefix"* ]] ; then
-	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_config:/vcw/pwd ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd cp -r /source/vcwc/elastic/journalbeat/sasl/_module/volumes/ingest_journal_journalbeat_config/* /vcw/pwd
+if [[ "vcw_module_vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_config" == "$prefix"* ]] ; then
+	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcw_module_vcwc_elastic_journalbeat_sasl__ingest_journal_journalbeat_config:/vcw/pwd ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd cp -r /source/vcwc/elastic/journalbeat/sasl/_module/volumes/ingest_journal_journalbeat_config/* /vcw/pwd
 fi
