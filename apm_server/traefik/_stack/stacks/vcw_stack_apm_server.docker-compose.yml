@@ -9,7 +9,7 @@ services:
     command: []
     volumes: []
     ports: []
-    networks: [${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
+    networks: [${VCW_STACK_GLOBAL_NETWORKGLOBAL}_overlay, ${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
     deploy:
       mode: replicated
       resources:
@@ -27,6 +27,6 @@ services:
 ${VCW_STACK_APM_SERVER_COMPOSE_EXTENSIONS}
 # END SERVICE vcwc/elastic/apm_server/traefik
 
-networks: {${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay: { external: true }}
+networks: {${VCW_STACK_GLOBAL_NETWORKGLOBAL}_overlay: { external: true }, ${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay: { external: true }}
 volumes: {}
 ${VCW_STACK_GLOBAL_COMPOSE_EXTENSIONS}

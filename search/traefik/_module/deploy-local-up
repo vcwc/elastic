@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-prefix="vcwc_elastic_kibana_traefik__$1"
-prefix="vcwc_elastic_kibana_traefik__$1"
+prefix="vcw_module_vcwc_elastic_search_traefik__$1"
+prefix="vcw_module_vcwc_elastic_search_traefik__$1"
 
-if [[ "vcwc_elastic_kibana_traefik__kibana_nginx_config_volume" == "$prefix"* ]] ; then
-	executionplane --silent docker volume create vcwc_elastic_kibana_traefik__kibana_nginx_config_volume
+if [[ "vcw_module_vcwc_elastic_search_traefik__elastic_elasticsearch_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker volume create vcw_module_vcwc_elastic_search_traefik__elastic_elasticsearch_volume
 fi
 
-if [[ "vcwc_elastic_kibana_traefik__kibana_nginx_config_volume" == "$prefix"* ]] ; then
-	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcwc_elastic_kibana_traefik__kibana_nginx_config_volume:/vcw/pwd ${VCW_REGISTRY}vcwc/controlplane.vcw console cmd cp -r /source/vcwc/elastic/kibana/traefik/_module/volumes/kibana_nginx_config_volume/* /vcw/pwd
+if [[ "vcw_module_vcwc_elastic_search_traefik__elastic_elasticsearch_volume" == "$prefix"* ]] ; then
+	executionplane --silent docker run -v vcw_controlplane_repos:/source -v vcw_module_vcwc_elastic_search_traefik__elastic_elasticsearch_volume:/usr/share/elasticsearch/data ${VCW_REGISTRY}vcwc/controlplane.vcw console untar /source/vcwc/elastic/search/traefik/_module/volumes/elastic_elasticsearch_volume.tar
 fi

@@ -8,7 +8,7 @@ services:
     environment: ['cluster.name=elasticsearch', 'bootstrap.memory_lock=true', ES_JAVA_OPTS=-Xms${EKA_ELASTICSEARCH_DEPLOY_RESOURCES_RESERVATIONS_MEMORY} -Xmx${EKA_ELASTICSEARCH_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}, 'discovery.type=single-node']
     command: []
     volumes: ['${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch_volume:/usr/share/elasticsearch/data']
-    ports: [${EKA_ELASTICSEARCH_MODULE_ELASTICSEARCH_PORT}:9200]
+    ports: [${EKA_ELASTICSEARCH_PORTS_ELASTICSEARCH_PORT}:9200]
     networks: [${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
     deploy:
       mode: replicated
@@ -23,10 +23,10 @@ ${EKA_ELASTICSEARCH_COMPOSE_EXTENSIONS}
 # START SERVICE vcwc/elastic/kibana
   kibana:
     image: ${VCW_REGISTRY}kibana:7.9.2
-    environment: ['ELASTICSEARCH_HOSTS=http://elasticsearch:9200','SERVER_BASEPATH=${EKA_KIBANA_MODULE_KIBANA_SERVER_BASEPATH}', 'XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED=false', 'LOGGING_VERBOSE=${EKA_KIBANA_MODULE_KIBANA_LOGGING_VERBOSE}']
+    environment: ['ELASTICSEARCH_HOSTS=http://elasticsearch:9200','SERVER_BASEPATH=${EKA_KIBANA_ENVIRONMENT_KIBANA_SERVER_BASEPATH}', 'XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED=false', 'LOGGING_VERBOSE=${EKA_KIBANA_ENVIRONMENT_KIBANA_LOGGING_VERBOSE}']
     command: []
     volumes: []
-    ports: [${EKA_KIBANA_MODULE_KIBANA_PORT}:5601]
+    ports: [${EKA_KIBANA_PORTS_KIBANA_PORT}:5601]
     networks: [${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
     deploy:
       mode: replicated
@@ -44,7 +44,7 @@ ${EKA_KIBANA_COMPOSE_EXTENSIONS}
     environment: ['ELASTICSEARCH_HOSTS=http://elasticsearch:9200']
     command: []
     volumes: []
-    ports: [${EKA_APM_SERVER_MODULE_APM_SERVER_PORT}:8200]
+    ports: [${EKA_APM_SERVER_PORTS_APM_SERVER_PORT}:8200]
     networks: [${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
     deploy:
       mode: replicated

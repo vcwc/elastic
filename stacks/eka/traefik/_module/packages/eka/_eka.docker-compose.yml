@@ -9,7 +9,7 @@ services:
     command: []
     volumes: ['${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch_volume:/usr/share/elasticsearch/data']
     ports: []
-    networks: [${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
+    networks: [${VCW_STACK_GLOBAL_NETWORKGLOBAL}_overlay, ${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
     deploy:
       mode: replicated
       resources:
@@ -30,7 +30,7 @@ ${EKA_ELASTICSEARCH_COMPOSE_EXTENSIONS}
 # START SERVICE vcwc/elastic/kibana/traefik
   kibana:
     image: ${VCW_REGISTRY}kibana:7.9.2
-    environment: ['ELASTICSEARCH_HOSTS=http://elasticsearch:9200','SERVER_BASEPATH=${EKA_KIBANA_MODULE_KIBANA_SERVER_BASEPATH}', 'XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED=false', 'LOGGING_VERBOSE=${EKA_KIBANA_MODULE_KIBANA_LOGGING_VERBOSE}']
+    environment: ['ELASTICSEARCH_HOSTS=http://elasticsearch:9200','SERVER_BASEPATH=/${VCW_STACK_GLOBAL_URLPREFIX}/kibana', 'XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED=false', 'LOGGING_VERBOSE=${EKA_KIBANA_MODULE_KIBANA_LOGGING_VERBOSE}']
     command: []
     volumes: []
     ports: []
@@ -59,7 +59,7 @@ ${EKA_KIBANA_COMPOSE_EXTENSIONS}
     command: []
     volumes: []
     ports: []
-    networks: [${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
+    networks: [${VCW_STACK_GLOBAL_NETWORKGLOBAL}_overlay, ${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay]
     deploy:
       mode: replicated
       resources:
@@ -77,7 +77,7 @@ ${EKA_KIBANA_COMPOSE_EXTENSIONS}
 ${EKA_APM_SERVER_COMPOSE_EXTENSIONS}
 # END SERVICE vcwc/elastic/apm_server/traefik
 
-networks: {${VCW_STACK_GLOBAL_NETWORKGLOBAL}_overlay, ${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay: { external: true }}
+networks: {${VCW_STACK_GLOBAL_NETWORKGLOBAL}_overlay: { external: true }, ${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay: { external: true }}
 volumes: {${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch_volume: { external: true }}
 ${VCW_STACK_GLOBAL_COMPOSE_EXTENSIONS}
 

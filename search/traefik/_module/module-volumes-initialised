@@ -1,1 +1,1 @@
-kibana_nginx_config_volume:/vcw/pwd
+elastic_elasticsearch_volume:/usr/share/elasticsearch/data

@@ -1,1 +1,1 @@
-elasticsearch_elasticsearch_volume:/usr/share/elasticsearch/data
+elastic_elasticsearch_volume:/usr/share/elasticsearch/data

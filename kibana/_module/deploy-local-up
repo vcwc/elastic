@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-prefix="vcwc_elastic_kibana__$1"
-prefix="vcwc_elastic_kibana__$1"
+prefix="vcw_module_vcwc_elastic_kibana__$1"
+prefix="vcw_module_vcwc_elastic_kibana__$1"

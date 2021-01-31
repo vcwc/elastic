@@ -5,7 +5,7 @@ services:
 # START SERVICE vcwc/elastic/search/traefik
   elasticsearch:
     image: ${VCW_REGISTRY}elasticsearch:7.9.2
-    environment: ['cluster.name=elasticsearch', 'bootstrap.memory_lock=true', ES_JAVA_OPTS=-Xms${VCW_STACK_ELASTICSEARCH_DEPLOY_RESOURCES_RESERVATIONS_MEMORY} -Xmx${VCW_STACK_ELASTICSEARCH_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}, 'discovery.type=single-node']
+    environment: ['cluster.name=elasticsearch', 'bootstrap.memory_lock=true', ES_JAVA_OPTS=-Xms${ELASTIC_DEPLOY_RESOURCES_RESERVATIONS_MEMORY} -Xmx${ELASTIC_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}, 'discovery.type=single-node']
     command: []
     volumes: ['${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch_volume:/usr/share/elasticsearch/data']
     ports: []
@@ -14,9 +14,9 @@ services:
       mode: replicated
       resources:
         limits:
-          memory: '${VCW_STACK_ELASTICSEARCH_DEPLOY_RESOURCES_LIMITS_MEMORY}'
+          memory: '${ELASTIC_DEPLOY_RESOURCES_LIMITS_MEMORY}'
         reservations:
-          memory: '${VCW_STACK_ELASTICSEARCH_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
+          memory: '${ELASTIC_DEPLOY_RESOURCES_RESERVATIONS_MEMORY}'
 
       labels: [traefik.enable=true,traefik.docker.network=${VCW_STACK_GLOBAL_NETWORKGLOBAL}_overlay,
       "traefik.http.middlewares.${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch.stripprefix.prefixes=/${VCW_STACK_GLOBAL_URLPREFIX}/elasticsearch,/${VCW_STACK_GLOBAL_URLPREFIX}/elasticsearch/",
@@ -24,7 +24,7 @@ services:
       traefik.http.routers.${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch.middlewares=${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch@docker,
       traefik.http.routers.${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch.entrypoints=conteco,
       traefik.http.routers.${VCW_STACK_GLOBAL_STACKPREFIX}_elasticsearch.rule=PathPrefix("/${VCW_STACK_GLOBAL_URLPREFIX}/elasticsearch") ]
-${VCW_STACK_ELASTICSEARCH_COMPOSE_EXTENSIONS}
+${ELASTIC_COMPOSE_EXTENSIONS}
 # END SERVICE vcwc/elastic/search/traefik
 
 networks: {${VCW_STACK_GLOBAL_NETWORKGLOBAL}_overlay: { external: true }, ${VCW_STACK_GLOBAL_NETWORKLOCAL}_overlay: { external: true }}
